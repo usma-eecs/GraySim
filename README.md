@@ -13,13 +13,13 @@ This simulation allows students to explore their understanding of single-process
 
 * FIFO (First-in-First-out): When the currently running process ceases to execute, the process that has been in the READY state the longest is selected to execute next.
 
-* SJF: When the currently running process ceases to execute, the process that has the SHORTEST expected processing time is selected next. SJF is a non-preemptive scheduling algorithm.
+* SJF (Shortest Job First): When the currently running process ceases to execute, the process that has the SHORTEST expected processing time is selected next. SJF is a non-preemptive scheduling algorithm.
 
-* STCF: When the currently running process ceases to execute, the process that has the SHORTEST remaining processing time is selected next. STCF is a preemptive scheduling algorithm.
+* STCF (Shortest Time-to-Completion First): When the currently running process ceases to execute, the process that has the SHORTEST remaining processing time is selected next. STCF is a preemptive scheduling algorithm.
 
 * Round Robin: When the currently running process ceases to execute or the timer expires, the process is moved back to the ready queue and the process that has been in the READY state the longest is selected to execute next for a time quanta.
 
-* MLFQ: When the currently running process ceases to execute, it is placed on the next lowest priority queue (if it hasn't completed its processing). The OS allocates the processor to the first process on the highest priority queue. The quantum is 2^i, where i is the priority of the queue on which the process had been waiting. MLFQ is a preemptive scheduling process.
+* MLFQ (Multi-Level Feedback Queue): When the currently running process ceases to execute, it is placed on the next lowest priority queue (if it hasn't completed its processing). The OS allocates the processor to the first process on the highest priority queue. The quantum is 2^i, where i is the priority of the queue on which the process had been waiting. MLFQ is a preemptive scheduling process.
 
 This is the first simulator built. A paper about it was presented during the CCSC-NE conference held in April of 2024. The paper can be found here:
 
@@ -30,13 +30,25 @@ This is the first simulator built. A paper about it was presented during the CCS
 
 This simulation allows students to explore their understanding of page replacement policies. The simulation supports the following policies:
 
-* Optimal: Replace the page that will be used furthest into the future.
+* Optimal: Replace the page that will be used furthest into the future. Note that this policy is unrealistic because we cannot predict future accesses. It is used as a baseline for comparison.
 
-* FIFO: Replace the page that was brought into memory first.
+* FIFO (First-in-First-out): Replace the page that was brought into memory first.
 
-* LRU: Replace the page that has not been used for the longest time period.
+* LRU (Least Recently Used): Replace the page that has not been used for the longest time period.
 
 * Clock: Replace the page identified by the clock algorithm.
+
+## Set-up
+
+To set-up your computer to run these simulations,
+
+1. Clone this repository
+
+1. Install Java. I'm using:
+    * Oracle Java Version: 1.8.0_351
+    * Note: The OpenJDK version does not work with these simulations.
+
+1. Install SBT. I'm using Version 1.8.2
 
 ## Instructions
 
