@@ -1,0 +1,120 @@
+package view
+
+import scala.swing._
+import java.awt.Color
+import controller.Controller
+
+object grid extends GridPanel(3, 2) {
+    contents += new Label("1,1") {
+        background = Color.red
+        opaque = true
+    }
+    contents += new Label("1,2") {
+        background = Color.pink
+        opaque = true
+    }
+    contents += new Label("2,1") {
+        background = Color.blue
+        opaque = true
+    }
+    contents += new Label("2,2") {
+        background = Color.green
+        opaque = true
+    }
+    contents += new Label("3,1") {
+        background = Color.yellow
+        opaque = true
+    }
+    contents += new Label("3,2") {
+        background = Color.cyan
+        opaque = true
+    }
+}
+
+object horizontalBox extends BoxPanel(Orientation.Horizontal) {
+    contents += new Label("Thing 1") {
+        background = Color.yellow
+        opaque = true
+    }
+    contents += new Label("Another Thing 2") {
+        background = Color.pink
+        opaque = true
+    }
+    contents += new Label("And One More Thing 3") {
+        background = Color.cyan
+        opaque = true
+    }
+}
+
+object flowPanel extends FlowPanel  {
+    contents += new Label("Thing 1") {
+        background = Color.yellow
+        opaque = true
+    }
+    contents += new Label("Another Thing 2") {
+        background = Color.pink
+        opaque = true
+    }
+    contents += new Label("And One More Thing 3") {
+        background = Color.cyan
+        opaque = true
+    }
+}
+
+import BorderPanel.Position._
+object borderPanel extends BorderPanel {
+    layout += new Label("North label") {
+        background = Color.cyan
+        opaque = true} -> North
+    layout += new Label("West label") {
+        background = Color.yellow
+        opaque = true} -> West
+    layout += new Label("Center label") {
+        background = Color.pink
+        opaque = true} -> Center
+    layout += new Label("South label") {
+        background = Color.green
+        opaque = true} -> South
+    layout += new Label("East label") {
+        background = Color.gray
+        opaque = true} -> East
+}
+
+class View extends MainFrame {
+
+  var _controller: Option[Controller] = None
+
+  // Components
+  val textArea = new TextArea("GUI-2")
+
+  /** View.init
+    * @param controller
+    */
+  def init(controller: Controller): Unit = {
+    _controller = Some(controller)
+    title = "My GUI"
+
+    // To demonstrate the other contents, comment out the textArea line below and
+    // uncomment out one of the alternatives in the lines below that.
+    //contents = textArea
+    //contents = grid
+    //contents = horizontalBox
+    //contents = flowPanel
+    contents = borderPanel
+
+    centerOnScreen()
+
+    menuBar = new MenuBar {
+      contents += new Menu("Menu 1") {
+        contents += new MenuItem(controller.hello)
+        contents += new MenuItem("MenuItem 2")
+        contents += new Separator
+        contents += new MenuItem(controller.exit) // end Exit menuItem
+      } // end Menu 1
+    } // end MenuBar
+
+    size = new Dimension(500, 500)
+    visible = true
+  }
+
+}
