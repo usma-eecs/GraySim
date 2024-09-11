@@ -40,5 +40,9 @@ class SchedulerView(view: View, contr: Controller, policy: Policy) extends Borde
   def hideEntry(row: Int, column: Int) = schedulingPlan.hideEntry(row, column)
   def showEntry(row: Int, column: Int) = schedulingPlan.showEntry(row, column)
   def toggleAnswer = schedulingPlan.toggleAnswer
-  def toggleAlgorithmVisibility = algorithmPanel.toggleVisibility
+  def toggleAlgorithmVisibility =
+    algorithmPanel.toggleVisibility
+    schedulingPlan.toggleAlgorithmButtonVisibility
+  def hideAlgorithmButton = buttonsPanel.hideAlgorithmButton
+  def showAlgorithmButton = buttonsPanel.showAlgorithmButton
   def toggleFeedbackWindow = schedulingPlan.toggleFeedbackWindow

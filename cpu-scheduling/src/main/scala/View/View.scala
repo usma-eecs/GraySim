@@ -103,6 +103,14 @@ class View extends MainFrame:
     schedulerViews(policy).toggleAlgorithmVisibility
     //print("Show policy?\n")
 
+  def showAlgorithmButton(policy: Policy) =
+    //println("View is now changing the algorithmButton to show")
+    schedulerViews(policy).showAlgorithmButton
+
+  def hideAlgorithmButton(policy: Policy) =
+    //println("View is now changing the algorithmButton to hide")
+    schedulerViews(policy).hideAlgorithmButton
+
   def toggleAnswer(policy: Policy) =
     schedulerViews(policy).toggleAnswer
     //print("Show solution?\n")

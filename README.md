@@ -17,7 +17,7 @@ This simulation allows students to explore their understanding of single-process
 
 * STCF (Shortest Time-to-Completion First): When the currently running process ceases to execute, the process that has the SHORTEST remaining processing time is selected next. STCF is a preemptive scheduling algorithm.
 
-* Round Robin: When the currently running process ceases to execute or the timer expires, the process is moved back to the ready queue and the process that has been in the READY state the longest is selected to execute next for a time quanta.
+* Round Robin (RR): When the currently running process ceases to execute or the timer expires, the process is moved back to the ready queue and the process that has been in the READY state the longest is selected to execute next for a time quanta.
 
 * MLFQ (Multi-Level Feedback Queue): When the currently running process ceases to execute, it is placed on the next lowest priority queue (if it hasn't completed its processing). The OS allocates the processor to the first process on the highest priority queue. The quantum is 2^i, where i is the priority of the queue on which the process had been waiting. MLFQ is a preemptive scheduling process.
 

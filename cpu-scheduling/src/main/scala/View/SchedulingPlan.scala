@@ -16,6 +16,7 @@ class SchedulingPlan(view: View, controller: Controller, policy: Policy)
   var schedulingPlan: Array[Array[Button]] = Array
     .ofDim[Button](Parameters.getMaxProcesses, Parameters.getTotalServiceTime)
   var solutionVisible = false
+  var algorithmButtonVisible = true
 
   // Initialize the scheduling Plan buttons
   for row <- 0 until Parameters.getMaxProcesses do
@@ -89,6 +90,12 @@ class SchedulingPlan(view: View, controller: Controller, policy: Policy)
     else
       showAnswer
 
+  def toggleAlgorithmButtonVisibility =
+    if algorithmButtonVisible then
+      hideAlgorithmButton
+    else
+      showAlgorithmButton
+
   def toggleFeedbackWindow =
     showFeedback
 
@@ -104,6 +111,18 @@ class SchedulingPlan(view: View, controller: Controller, policy: Policy)
     solutionVisible = false
     Parameters.hideAnswers
     view.hideAnswers(policy)
+
+  def hideAlgorithmButton = //change to hide
+    view.hideAlgorithmButton(policy)
+    algorithmButtonVisible = false
+    //println("hiding algorithmButton")
+
+
+  def showAlgorithmButton = //change to show
+    view.showAlgorithmButton(policy)
+    algorithmButtonVisible = true
+    //println("showing algorithmButton")
+
 
   def showFeedback =
     controller.giveFeedback(policy)
