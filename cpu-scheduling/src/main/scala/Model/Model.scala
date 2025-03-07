@@ -25,6 +25,12 @@ class Model:
 
   def getNumProcesses = processQueue.numberProcesses
 
+  def getTotalServiceTime : Int =
+    var totalServiceTime = 0
+    for j <- 0 until Parameters.getNumProcesses do
+      totalServiceTime += Parameters.processServiceTimes(j)
+    totalServiceTime
+
   def getStudentSolution(policy: Policy): StudentSolution =
     studentSolutions(policy)
 
@@ -65,3 +71,6 @@ class Model:
 
   def checkAnswers(policy: Policy): Int =
     computedSolutions(policy).checkAnswers(studentSolutions(policy))
+
+  def resetStudentSolution(policy: Policy): Unit =
+    studentSolutions(policy).unscheduleAll

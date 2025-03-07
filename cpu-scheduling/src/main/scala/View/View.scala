@@ -141,3 +141,13 @@ class View extends MainFrame:
     schedulerViews(policy).showAnswers
   def hideAnswer(policy: Policy) =
     schedulerViews(policy).hideAnswers
+
+  def updateStudentAnswers(policy: Policy) =
+    var sView = schedulerViews(policy)
+    for row <- 0 until Parameters.getNumProcesses do
+      for column <- 0 until Parameters.getTotalServiceTime do
+        sView.resetEntry(row,column)
+
+  def reset(policy: Policy) =
+    _controller.get.reset(policy)
+    updateStudentAnswers(policy)

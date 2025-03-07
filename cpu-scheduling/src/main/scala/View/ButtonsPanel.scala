@@ -59,6 +59,14 @@ class ButtonsPanel(view: View, policy: Policy) extends BoxPanel(Orientation.Vert
       view.toggleFeedbackWindow(policy)
     )
 
+  val resetButton: ControlButton =
+    new ControlButton(
+      "Reset",
+      "Reset",
+      Parameters.resetBackgroundColor,
+      view.reset(policy)
+    )
+
   def showSolutionButton = solutionButton.show
   def hideSolutionButton = solutionButton.hide
 
@@ -69,6 +77,10 @@ class ButtonsPanel(view: View, policy: Policy) extends BoxPanel(Orientation.Vert
   def showFeedbackButton = feedbackButton.show
   def hideFeedbackButton = feedbackButton.hide
 
+  def showResetButton = resetButton.show
+  def hideResetButton = resetButton.hide
+
   contents += algorithmButton
   contents += feedbackButton
   contents += solutionButton
+  contents += resetButton

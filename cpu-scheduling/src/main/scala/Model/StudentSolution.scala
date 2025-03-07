@@ -2,6 +2,7 @@ package model
 
 import scala.collection.mutable.ArrayBuffer
 import model.Parameters
+import controller.Controller
 
 class StudentSolution:
   val schedulingPlan: Array[Array[Char]] = Array.ofDim[Char](Parameters.getNumProcesses, Parameters.getTotalServiceTime)
@@ -39,6 +40,11 @@ class StudentSolution:
         processRow = row
     assert(processRow != -1)
     schedulingPlan(processRow)(timeUnit) = idleEntry
+
+  def unscheduleAll =
+    for row <- 0 until Parameters.getNumProcesses do
+      for column <- 0 until Parameters.getTotalServiceTime do
+        schedulingPlan(row)(column) = idleEntry
 
   def isScheduled(r: Int, c: Int): Boolean =
     schedulingPlan(r)(c) != '-'

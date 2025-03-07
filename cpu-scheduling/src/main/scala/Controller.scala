@@ -12,6 +12,9 @@ class Controller(view: View, model: Model):
     view.showAnswer(policy)
   }
 
+  def reset(policy: Policy) =
+    model.resetStudentSolution(policy)
+
   def toggleAlgorithmVisibility(policy: Policy) = Action("Toggle Algorithm Visibility") {
     view.toggleAlgorithmVisibility(policy)
   }

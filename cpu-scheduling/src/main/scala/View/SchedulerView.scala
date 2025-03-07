@@ -46,3 +46,4 @@ class SchedulerView(view: View, contr: Controller, policy: Policy) extends Borde
   def hideAlgorithmButton = buttonsPanel.hideAlgorithmButton
   def showAlgorithmButton = buttonsPanel.showAlgorithmButton
   def toggleFeedbackWindow = schedulingPlan.toggleFeedbackWindow
+  def resetEntry(row: Int, column: Int) = schedulingPlan.reset(row, column)

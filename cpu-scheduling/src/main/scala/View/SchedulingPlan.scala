@@ -115,14 +115,15 @@ class SchedulingPlan(view: View, controller: Controller, policy: Policy)
   def hideAlgorithmButton = //change to hide
     view.hideAlgorithmButton(policy)
     algorithmButtonVisible = false
-    //println("hiding algorithmButton")
 
 
   def showAlgorithmButton = //change to show
     view.showAlgorithmButton(policy)
     algorithmButtonVisible = true
-    //println("showing algorithmButton")
 
+  def reset(row: Int, column: Int) =
+    schedulingPlan(row)(column).background = Parameters.buttonBackgroundColor
+    schedulingPlan(row)(column).foreground = Parameters.buttonBackgroundColor
 
   def showFeedback =
     controller.giveFeedback(policy)

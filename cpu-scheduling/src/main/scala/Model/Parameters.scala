@@ -121,6 +121,7 @@ object Parameters:
   val algorithmBackgroundColor = new Color(247, 204, 186)
   val solutionBackgroundColor = new Color(247, 176, 146)
   val feedbackBackgroundColor = new Color(247, 188, 164)
+  val resetBackgroundColor = new Color(247, 160, 115)
 
   val algorithmTextBoxTextColor = new Color(247,218,221)
   val algorithmTextBoxBackgroundColor = new Color(99,3,13)
