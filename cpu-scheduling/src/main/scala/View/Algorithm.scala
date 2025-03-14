@@ -22,9 +22,11 @@ class Algorithm(view: View, algorithm: String) extends TextPane:
 
   def showAlgorithm() =
     algVisible = true
+    foreground = Parameters.getAlgorithmTextboxTextColor
 
   def hideAlgorithm() =
     algVisible = false
+    foreground = Parameters.getAlgorithmTextboxBackGroundColor
 
   def isVisible: Boolean =
     algVisible
@@ -50,3 +52,6 @@ class AlgorithmsPanel(view: View, algorithm: String) extends BoxPanel(Orientatio
 
   contents += algorithmText
   if Parameters.showPseudoCode then contents += pseudoCodey
+
+  def hide =
+    algorithmText.hideAlgorithm()

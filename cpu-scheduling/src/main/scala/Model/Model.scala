@@ -35,6 +35,7 @@ class Model:
     studentSolutions(policy)
 
   def init =
+    Parameters.newProblem
     processQueue.init
     var totalServiceTime = 0
     for j <- 0 until Parameters.getNumProcesses do

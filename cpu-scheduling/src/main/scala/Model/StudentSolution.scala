@@ -5,14 +5,14 @@ import model.Parameters
 import controller.Controller
 
 class StudentSolution:
-  val schedulingPlan: Array[Array[Char]] = Array.ofDim[Char](Parameters.getNumProcesses, Parameters.getTotalServiceTime)
+  val schedulingPlan: Array[Array[Char]] = Array.ofDim[Char](Parameters.getMaxProcesses, Parameters.getMaxTotalServiceTime)
   val idleEntry = '-'
   init
 
   def init =
     /* Initialize the schedulingPlan to show all elements as unscheduled */
-    for row <- 0 until Parameters.getNumProcesses do
-      for column <- 0 until Parameters.getTotalServiceTime do
+    for row <- 0 until Parameters.getMaxProcesses do
+      for column <- 0 until Parameters.getMaxTotalServiceTime do
         schedulingPlan(row)(column) = idleEntry
 
   private def getRow(processId: String): Int =

@@ -17,63 +17,68 @@ class SchedulingPlan(view: View, controller: Controller, policy: Policy)
     .ofDim[Button](Parameters.getMaxProcesses, Parameters.getTotalServiceTime)
   var solutionVisible = false
   var algorithmButtonVisible = true
+  init
 
-  // Initialize the scheduling Plan buttons
-  for row <- 0 until Parameters.getMaxProcesses do
-    for column <- 0 until Parameters.getTotalServiceTime do
-      schedulingPlan(row)(column) = new Button() {
-        background = Parameters.buttonBackgroundColor
-        foreground = Parameters.buttonBackgroundColor
-        opaque = true
-        action = Action("") {
-          if this.background == Parameters.buttonSelectedColor then
-            this.background = Parameters.buttonBackgroundColor
-            controller.unrecordStudentScheduleEntry(
-              policy,
-              Parameters.processNames(row),
-              column
-            )
-          else
-            this.background = Parameters.buttonSelectedColor
-            controller.recordStudentScheduleEntry(
-              policy,
-              Parameters.processNames(row),
-              column
-            )
+  def init =
+    contents.clear
+    this.rows = (Parameters.getNumProcesses + 1)
+    this.columns = (Parameters.getTotalServiceTime + Parameters.getNumProcesses + 1)
+    // Initialize the scheduling Plan buttons
+    for row <- 0 until Parameters.getMaxProcesses do // MRE getMaxProcesses???
+      for column <- 0 until Parameters.getTotalServiceTime do
+        schedulingPlan(row)(column) = new Button() {
+          background = Parameters.buttonBackgroundColor
+          foreground = Parameters.buttonBackgroundColor
+          opaque = true
+          action = Action("") {
+            if this.background == Parameters.buttonSelectedColor then
+              this.background = Parameters.buttonBackgroundColor
+              controller.unrecordStudentScheduleEntry(
+                policy,
+                Parameters.processNames(row),
+                column
+              )
+            else
+              this.background = Parameters.buttonSelectedColor
+              controller.recordStudentScheduleEntry(
+                policy,
+                Parameters.processNames(row),
+                column
+              )
 
-          if Parameters.areAnswersVisible then
-            this.foreground = Parameters.buttonTextVisibleColor
-          else
-            this.foreground = this.background
+            if Parameters.areAnswersVisible then
+              this.foreground = Parameters.buttonTextVisibleColor
+            else
+              this.foreground = this.background
+          }
         }
-      }
 
-  // Initialize the grid panel
-  val myLabelSize = new Dimension(Parameters.getLabelWidth, Parameters.getLabelHeight)
+    // Initialize the grid panel
+    val myLabelSize = new Dimension(Parameters.getLabelWidth, Parameters.getLabelHeight)
 
-  for row <- 1 to Parameters.getNumProcesses+1 do
-    if row == 1 then
-      contents += new Label("Process") {
-        background = Parameters.headingColor
-        foreground = Parameters.headingTextColor
-        minimumSize = myLabelSize
-        opaque = true
-      }
-    else
-      contents += new Label(Parameters.processNames(row-2)) {
-        background = Parameters.headingColor
-        foreground = Parameters.headingTextColor
-        opaque = true
-      }
-    for column <- 1 to Parameters.getTotalServiceTime do
+    for row <- 1 to Parameters.getNumProcesses+1 do
       if row == 1 then
-        val columnLabel = column - 1
-        contents += new Label(columnLabel.toString) {
+        contents += new Label("Process") {
+          background = Parameters.headingColor
+          foreground = Parameters.headingTextColor
+          minimumSize = myLabelSize
+          opaque = true
+        }
+      else
+        contents += new Label(Parameters.processNames(row-2)) {
           background = Parameters.headingColor
           foreground = Parameters.headingTextColor
           opaque = true
         }
-      else contents += schedulingPlan(row - 2)(column - 1)
+      for column <- 1 to Parameters.getTotalServiceTime do
+        if row == 1 then
+          val columnLabel = column - 1
+          contents += new Label(columnLabel.toString) {
+            background = Parameters.headingColor
+            foreground = Parameters.headingTextColor
+            opaque = true
+          }
+        else contents += schedulingPlan(row - 2)(column - 1)
 
   def showEntry(row: Int, column: Int): Unit =
     schedulingPlan(row)(column).text = "X"

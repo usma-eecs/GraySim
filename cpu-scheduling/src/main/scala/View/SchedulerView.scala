@@ -23,8 +23,8 @@ class SchedulerView(view: View, contr: Controller, policy: Policy) extends Borde
 
   val algorithmPanel = new AlgorithmsPanel(view, contr.getAlgorithm(policy))
   val buttonsPanel = new ButtonsPanel(view, policy)
-  val processTable = new ProcessTable()
-  val schedulingPlan = new SchedulingPlan(view, contr, policy)
+  var processTable = new ProcessTable()
+  var schedulingPlan = new SchedulingPlan(view, contr, policy)
 
   layout += algorithmPanel -> North
   layout += explanationText -> South
@@ -47,3 +47,13 @@ class SchedulerView(view: View, contr: Controller, policy: Policy) extends Borde
   def showAlgorithmButton = buttonsPanel.showAlgorithmButton
   def toggleFeedbackWindow = schedulingPlan.toggleFeedbackWindow
   def resetEntry(row: Int, column: Int) = schedulingPlan.reset(row, column)
+
+  def refreshSchedulerView =
+    processTable = new ProcessTable()
+    processTable.refreshTable
+    layout += processTable -> West
+    schedulingPlan = new SchedulingPlan(view, contr, policy)
+    layout += schedulingPlan -> Center
+    algorithmPanel.hide
+    showAlgorithmButton
+    showSolutionButton

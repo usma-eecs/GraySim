@@ -80,6 +80,13 @@ object Parameters:
   def getProcessServiceTime(processNum: Int): Int =
     Parameters.processServiceTimes(processNum)
 
+  def getMaxTotalServiceTime: Int=
+    maxTotalServiceLength
+
+  def showProcesses =
+    for p <- 0 until getNumProcesses do
+      println("Process " + getProcessName(p) + ": start=" + getProcessStartTime(p) + " service=" + getProcessServiceTime(p))
+
   def setTotalServiceTime(time: Int) =
     totalServiceTime = time
 
@@ -183,6 +190,9 @@ object Parameters:
     Array((0,6), (1,3), (2,2), (3,7), (4,1)),
     Array((0,4), (0,8), (1,1), (4,8), (7,5))
   )
+
+  def newProblem =
+    activateRandomization
 
   private def activateRandomization: Unit =
     resetProcessData

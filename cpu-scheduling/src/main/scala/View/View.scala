@@ -10,7 +10,6 @@ import model.Parameters
 import model.Policy
 
 class View extends MainFrame:
-
   var _controller: Option[Controller] = None
 
   // Create feedback dialog
@@ -37,9 +36,10 @@ class View extends MainFrame:
 
     menuBar = new MenuBar {
       contents += new Menu("Controls") {
-//        contents += new MenuItem(controller.showAnswer)
-//        contents += new MenuItem(controller.toggleAlgorithmVisibility)
-//        contents += new Separator
+        contents += new MenuItem(Action("New Practice Problem") {
+          _controller.get.newProblem
+        })
+        contents += new Separator
         contents += new MenuItem(controller.exit)
       }
     } // end MenuBar
@@ -60,34 +60,6 @@ class View extends MainFrame:
     }
     for policy <- Policy.values do
       tabbedPane.pages += new TabbedPane.Page(policy.getShortName, schedulerViews(policy).getPanel, policy.getLongName)
-  /*
-      pages += new TabbedPane.Page(
-        "FIFO",
-        fifoPanel.getPanel,
-        "This tab shows the First In First Out scheduling algorithm."
-      )
-      pages += new TabbedPane.Page(
-        "SJF",
-        sjfPanel.getPanel,
-        "This tab shows the Shortest Process Next scheduling algorithm."
-      )
-      pages += new TabbedPane.Page(
-        "STCF",
-        stcfPanel.getPanel,
-        "This tab shows the Shortest Remaining Time scheduling algorithm."
-      )
-      pages += new TabbedPane.Page(
-        "RR",
-        rrPanel.getPanel,
-        "This tab shows the Round Robin scheduling algorithm."
-      )
-      pages += new TabbedPane.Page(
-        "MLFQ",
-        mlfqPanel.getPanel,
-        "This tab shows the Multi-Level Feedback Queue scheduling algorithm."
-      )
-    }
-*/
     contents = tabbedPane
 
     size = new Dimension(
@@ -96,28 +68,28 @@ class View extends MainFrame:
     )
     visible = true
 
+  def resetButtons =
+    for policy <- Policy.values do
+      schedulerViews(policy).hideAnswers
+      schedulerViews(policy).hideAlgorithmButton
+
   def giveFeedback(feedbackInfo: String) =
     feedbackDialog.showFeedback(feedbackInfo)
 
   def toggleAlgorithmVisibility(policy: Policy) =
     schedulerViews(policy).toggleAlgorithmVisibility
-    //print("Show policy?\n")
 
   def showAlgorithmButton(policy: Policy) =
-    //println("View is now changing the algorithmButton to show")
     schedulerViews(policy).showAlgorithmButton
 
   def hideAlgorithmButton(policy: Policy) =
-    //println("View is now changing the algorithmButton to hide")
     schedulerViews(policy).hideAlgorithmButton
 
   def toggleAnswer(policy: Policy) =
     schedulerViews(policy).toggleAnswer
-    //print("Show solution?\n")
 
   def toggleFeedbackWindow(policy: Policy) =
     schedulerViews(policy).toggleFeedbackWindow
-    //print("TODO: Show feedback window")
 
   def showSolutionButton(policy: Policy) =
     schedulerViews(policy).showSolutionButton
@@ -150,4 +122,12 @@ class View extends MainFrame:
 
   def reset(policy: Policy) =
     _controller.get.reset(policy)
+    schedulerViews(policy).refreshSchedulerView
     updateStudentAnswers(policy)
+
+  def reset() : Unit =
+    processConfigurationPanel.refreshConfigurationPanel
+    for policy <- Policy.values do
+      reset(policy)
+
+

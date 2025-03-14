@@ -8,6 +8,10 @@ class Controller(view: View, model: Model):
 
   def init = {}
 
+  def newProblem =
+    model.init
+    view.reset()
+
   def showAnswer(policy: Policy) = Action("Show Answer") {
     view.showAnswer(policy)
   }
