@@ -1,7 +1,7 @@
 package model
 
 class Model:
-  private val computedSolutions = Map[Policy, Scheduler](
+  private var computedSolutions = Map[Policy, Scheduler](
     (Policy.FIFO, new FIFO),
     (Policy.SJF, new SJF),
     (Policy.STCF, new STCF),
@@ -37,6 +37,13 @@ class Model:
   def init =
     Parameters.newProblem
     processQueue.init
+    computedSolutions = Map[Policy, Scheduler](
+      (Policy.FIFO, new FIFO),
+      (Policy.SJF, new SJF),
+      (Policy.STCF, new STCF),
+      (Policy.RR, new RoundRobin),
+      (Policy.MLFQ, new MLFQ)
+    )
     var totalServiceTime = 0
     for j <- 0 until Parameters.getNumProcesses do
       totalServiceTime += Parameters.processServiceTimes(j)

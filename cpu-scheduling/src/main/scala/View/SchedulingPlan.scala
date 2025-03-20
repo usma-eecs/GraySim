@@ -129,6 +129,7 @@ class SchedulingPlan(view: View, controller: Controller, policy: Policy)
   def reset(row: Int, column: Int) =
     schedulingPlan(row)(column).background = Parameters.buttonBackgroundColor
     schedulingPlan(row)(column).foreground = Parameters.buttonBackgroundColor
+    schedulingPlan(row)(column).repaint()
 
   def showFeedback =
     controller.giveFeedback(policy)

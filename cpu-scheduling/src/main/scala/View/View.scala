@@ -120,7 +120,7 @@ class View extends MainFrame:
       for column <- 0 until Parameters.getTotalServiceTime do
         sView.resetEntry(row,column)
 
-  def reset(policy: Policy) =
+  def reset(policy: Policy): Unit =
     _controller.get.reset(policy)
     schedulerViews(policy).refreshSchedulerView
     updateStudentAnswers(policy)
@@ -129,5 +129,3 @@ class View extends MainFrame:
     processConfigurationPanel.refreshConfigurationPanel
     for policy <- Policy.values do
       reset(policy)
-
-

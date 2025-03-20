@@ -46,14 +46,20 @@ class SchedulerView(view: View, contr: Controller, policy: Policy) extends Borde
   def hideAlgorithmButton = buttonsPanel.hideAlgorithmButton
   def showAlgorithmButton = buttonsPanel.showAlgorithmButton
   def toggleFeedbackWindow = schedulingPlan.toggleFeedbackWindow
-  def resetEntry(row: Int, column: Int) = schedulingPlan.reset(row, column)
+  def resetEntry(row: Int, column: Int) =
+    schedulingPlan.reset(row, column)
+
+  override def repaint() =
+    super.repaint()
 
   def refreshSchedulerView =
     processTable = new ProcessTable()
     processTable.refreshTable
     layout += processTable -> West
     schedulingPlan = new SchedulingPlan(view, contr, policy)
+    schedulingPlan.repaint()
     layout += schedulingPlan -> Center
     algorithmPanel.hide
     showAlgorithmButton
     showSolutionButton
+    this.repaint()

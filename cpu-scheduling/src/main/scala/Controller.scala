@@ -59,6 +59,9 @@ class Controller(view: View, model: Model):
   def getStudentSolutionEntry(policy: Policy, row: Int, column: Int): Char =
     model.getStudentSolutionEntry(policy, row, column)
 
+  def repaint: Unit =
+    view.repaint()
+
   def exit = Action("Exit") {
     sys.exit(0)
   }
