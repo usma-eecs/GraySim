@@ -47,7 +47,8 @@ object Parameters:
   def getButtonHeight: Int = buttonHeight
 
   val heightOfTabs = 50
-  val heightPerFrameRow = 54
+  // highPerFrameRow was 54
+  val heightPerFrameRow = 35
   val heightOfAlgorithm = 50
   val heightOfInput = 50
   val heightOfLabel = 50
